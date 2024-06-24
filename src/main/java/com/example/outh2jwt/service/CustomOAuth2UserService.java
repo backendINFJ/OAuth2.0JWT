@@ -2,6 +2,7 @@ package com.example.outh2jwt.service;
 
 import com.example.outh2jwt.dto.GoogleResponse;
 import com.example.outh2jwt.dto.OAuth2Response;
+import com.example.outh2jwt.dto.UserDTO;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
@@ -33,7 +34,17 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             return null;
         }
 
-        return oAuth2User;
-        //추후 작성
+        String username = oAuth2Response.getProvider() + "" + oAuth2Response.getProvider();
+
+
+        UserDTO userDTO = new UserDTO();
+
+        userDTO.setRole("ROLE_USER");
+        userDTO.setName(oAuth2Response.getName());
+        userDTO.setUsername(username);
+
+        return new CustomOAuth2USer(userDTO);
     }
+
+
 }
