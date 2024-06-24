@@ -1,5 +1,6 @@
 package com.example.outh2jwt.service;
 
+import com.example.outh2jwt.dto.CustomOAuth2User;
 import com.example.outh2jwt.dto.GoogleResponse;
 import com.example.outh2jwt.dto.OAuth2Response;
 import com.example.outh2jwt.dto.UserDTO;
@@ -43,7 +44,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         userDTO.setName(oAuth2Response.getName());
         userDTO.setUsername(username);
 
-        return new CustomOAuth2USer(userDTO);
+        return new CustomOAuth2User(userDTO);
     }
 
 
