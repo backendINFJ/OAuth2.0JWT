@@ -1,3 +1,5 @@
+package com.example.outh2jwt.dto;
+
 import com.example.outh2jwt.dto.UserDTO;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;

@@ -17,35 +17,28 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
 
         OAuth2User oAuth2User = super.loadUser(userRequest);
-
         System.out.println(oAuth2User);
 
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
         OAuth2Response oAuth2Response = null;
         if (registrationId.equals("naver")) {
-
-            System.out.println("Naver");
-        }
-        else if (registrationId.equals("google")) {
+            System.out.println("Naver Login");
+        } else if (registrationId.equals("google")) {
 
             oAuth2Response = new GoogleResponse(oAuth2User.getAttributes());
-        }
-        else {
+        } else {
 
             return null;
         }
 
-        String username = oAuth2Response.getProvider() + "" + oAuth2Response.getProvider();
-
+        //리소스 서버에서 발급 받은 정보로 사용자를 특정할 아이디값을 만듬
+        String username = oAuth2Response.getProvider() + " " + oAuth2Response.getProviderId();
 
         UserDTO userDTO = new UserDTO();
-
-        userDTO.setRole("ROLE_USER");
-        userDTO.setName(oAuth2Response.getName());
         userDTO.setUsername(username);
+        userDTO.setName(oAuth2Response.getName());
+        userDTO.setRole("ROLE_USER");
 
         return new CustomOAuth2User(userDTO);
     }
-
-
 }
